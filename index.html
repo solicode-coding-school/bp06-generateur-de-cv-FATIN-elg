@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Générateur de CV Dynamique</h1>
+  <div class="container">
+  <form id="cvForm">
+    <div class="form-column">
+      <h2>Informations personnelles</h2>
+      <label for="name">Nom complet :</label>
+      <input type="text" id="name" required>
+      
+      <label for="jobTitle">Poste souhaité :</label>
+      <input type="text" id="jobTitle" required>
+
+      <label for="photo">Photo :</label>
+      <input type="file" id="photo" accept="image/*" required>
+      
+      <label for="email">Email :</label>
+      <input type="email" id="email" required>
+      
+      <label for="phone">Numéro de téléphone :</label>
+      <input type="tel" id="phone" required>
+
+      <label for="languages">Langues :</label>
+      <input type="text" id="languages" required>
+      
+      <label for="hobbies">Centres d'intérêt :</label>
+      <textarea id="hobbies" required></textarea>
+    </div>
+    
+    <div class="form-column" id="education-section">
+      <h2>Formation</h2>
+      <div class="education-group">
+        <label>École/Université :</label>
+        <input type="text" class="school" required>
+        
+        <label>Diplôme :</label>
+        <input type="text" class="degree" required>
+        
+        <label>Date :</label>
+        <input type="month" class="edu-date" required>
+        
+        <button type="button" class="add-btn" onclick="cvApp.addSection('education')">Ajouter une formation</button>
+      </div>
+    </div>
+
+    <div class="form-column" id="experience-section">
+      <h2>Expérience professionnelle</h2>
+      <div class="experience-group">
+        <label>Entreprise :</label>
+        <input type="text" class="company" required>
+        
+        <label>Tâches :</label>
+        <textarea class="tasks" required></textarea>
+        
+        <button type="button" class="add-btn" onclick="cvApp.addSection('experience')">Ajouter une expérience</button>
+      </div>
+    </div>
+    
+    <button type="button" id="generateBtn">Générer le CV</button>
+    <button type="button" id="savePdfBtn">Télécharger le CV en PDF</button>
+  </form>
+
+  <section id="cvDisplay" class="hidden">
+    <div class="header">
+      <h2 id="cvName"></h2>
+      <p id="cvJobTitle"></p>
+    </div>
+    <div class="left-section">
+      <img id="cvPhoto" alt="Photo de profil">
+      <h3 class="section-title">Informations personnelles</h3>
+      <p><strong>Email :</strong> <span id="cvEmail"></span></p>
+      <p><strong>Téléphone :</strong> <span id="cvPhone"></span></p>
+      <h3 class="section-title">Langues</h3>
+      <p id="cvLanguages"></p>
+      <h3 class="section-title">Centres d'intérêt</h3>
+      <p id="cvHobbies"></p>
+    </div>
+    <div class="right-section">
+      <h3 class="section-title">Formation</h3>
+      <div id="cvEducation"></div>
+      <h3 class="section-title">Expériences professionnelles</h3>
+      <div id="cvExperience"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
