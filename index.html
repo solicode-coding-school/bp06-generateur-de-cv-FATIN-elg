@@ -1,94 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Générateur de CV</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Générateur de CV Dynamique</h1>
-  <div class="container">
-  <form id="cvForm">
-    <div class="form-column">
-      <h2>Informations personnelles</h2>
-      <label for="name">Nom complet :</label>
-      <input type="text" id="name" required>
-      
-      <label for="jobTitle">Poste souhaité :</label>
-      <input type="text" id="jobTitle" required>
+    <!-- formuaire de remplissage les données -->
+    <div class="container">
+        <h1>Générateur de CV</h1>
+        <div class="form-section">
+            <!-- formulaire devisé en plusieure groupe pour simplifié l'utilisation en js -->
+            <form id="cvForm">
+                <h2>Informations Personnelles</h2>
 
-      <label for="photo">Photo :</label>
-      <input type="file" id="photo" accept="image/*" required>
-      
-      <label for="email">Email :</label>
-      <input type="email" id="email" required>
-      
-      <label for="phone">Numéro de téléphone :</label>
-      <input type="tel" id="phone" required>
+                <div class="form-group">
+                    <label for="photo">Photo de profil:</label>
+                    <input type="file" id="photo" accept="image/*" required>
+                </div>
 
-      <label for="languages">Langues :</label>
-      <input type="text" id="languages" required>
-      
-      <label for="hobbies">Centres d'intérêt :</label>
-      <textarea id="hobbies" required></textarea>
-    </div>
-    
-    <div class="form-column" id="education-section">
-      <h2>Formation</h2>
-      <div class="education-group">
-        <label>École/Université :</label>
-        <input type="text" class="school" required>
-        
-        <label>Diplôme :</label>
-        <input type="text" class="degree" required>
-        
-        <label>Date :</label>
-        <input type="month" class="edu-date" required>
-        
-        <button type="button" class="add-btn" onclick="cvApp.addSection('education')">Ajouter une formation</button>
-      </div>
-    </div>
+                <div class="form-group">
+                    <label for="nomComplet">Nom Complet:</label>
+                    <input type="text" id="nomComplet" required>
+                </div>
 
-    <div class="form-column" id="experience-section">
-      <h2>Expérience professionnelle</h2>
-      <div class="experience-group">
-        <label>Entreprise :</label>
-        <input type="text" class="company" required>
-        
-        <label>Tâches :</label>
-        <textarea class="tasks" required></textarea>
-        
-        <button type="button" class="add-btn" onclick="cvApp.addSection('experience')">Ajouter une expérience</button>
-      </div>
-    </div>
-    
-    <button type="button" id="generateBtn">Générer le CV</button>
-    <button type="button" id="savePdfBtn">Télécharger le CV en PDF</button>
-  </form>
+                <div class="form-group">
+                    <label for="titre">Titre du Poste:</label>
+                    <input type="text" id="titre" required>
+                </div>
 
-  <section id="cvDisplay" class="hidden">
-    <div class="header">
-      <h2 id="cvName"></h2>
-      <p id="cvJobTitle"></p>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telephone">Téléphone:</label>
+                    <input type="tel" id="telephone" required>
+                </div>
+
+                <h2>Formation</h2>
+                <div id="formationsContainer"></div>
+                <div class="form-group formation-inputs">
+                    <label for="ecole">École/Université:</label>
+                    <input type="text" id="ecole">
+                    <label for="diplome">Diplôme:</label>
+                    <input type="text" id="diplome">
+                    <label for="dateFirst">Date de début:</label>
+                    <input type="date" id="dateFirst">
+                    <label for="dateEnd">Date de fin:</label>
+                    <input type="date" id="dateEnd">
+                    <button type="button" id="ajouterFormation" class="btn-add">Ajouter Formation</button>
+                </div>
+
+                <h2>Expérience Professionnelle</h2>
+                <div id="experiencesContainer"></div>
+                <div class="form-group experience-inputs">
+                    <label for="entreprise">Entreprise:</label>
+                    <input type="text" id="entreprise">
+                    <label for="posteExperience">Poste:</label>
+                    <input type="text" id="posteExperience">
+                    <label for="dateDebut">Date de début:</label>
+                    <input type="date" id="dateDebut">
+                    <label for="dateFin">Date de fin:</label>
+                    <input type="date" id="dateFin">
+                    <label for="taches">Tâches/Responsabilités:</label>
+                    <textarea id="taches" rows="4"></textarea>
+                    <button type="button" id="ajouterExperience" class="btn-add">Ajouter Expérience</button>
+                </div>
+
+                
+
+                <h2>Langues</h2>
+                <div id="languesContainer"></div>
+                <div class="form-group langues-inputs">
+                    <label for="langue">Langue:</label>
+                    <input type="text" id="langue" placeholder="ex: Français, English, العربية">
+                    <label for="niveau">Niveau:</label>
+                    <select id="niveau">
+                        <option value="">Sélectionnez un niveau</option>
+                        <option value="Langue Maternelle">Langue Maternelle</option>
+                        <option value="Bilingue">Bilingue</option>
+                        <option value="Courant">Courant</option>
+                        <option value="Avancé">Avancé</option>
+                        <option value="Intermédiaire">Intermédiaire</option>
+                        <option value="Débutant">Débutant</option>
+                    </select>
+                    <button type="button" id="ajouterLangue" class="btn-add">Ajouter Langue</button>
+                </div>
+
+                <h2>Informations Complémentaires</h2>
+                <div class="form-group">
+                    <label for="interets">Centres d'intérêt:</label>
+                    <textarea id="interets" rows="4" required></textarea>
+                </div>
+                    <!-- apré click sur les button si dessous les information afficher ou upload entant que pdf avec l'utilisation des lien de bibliotheque avec script qui aide a cette fonction -->
+                <div class="buttons">
+                    <button type="button" id="genererCV">Générer CV</button>
+                    <button type="button" id="telecharger">Télécharger</button>
+                </div>
+            </form>
+        </div>
+        <!-- partit d'affichage de cv -->
+        <div class="preview-section" id="cvPreview">
+            <div class="cv-header">
+                <div class="photo-placeholder">
+                    <img id="photoPreview" alt="Photo de profil">
+                </div>
+                <div class="personal-info">
+                    <h2 id="previewNom"></h2>
+                    <h3 id="previewTitre"></h3>
+                    <p id="previewEmail"></p>
+                    <p id="previewTelephone"></p>
+                </div>
+            </div>
+            <div class="cv-body">
+                <section class="formation">
+                    <h3>Formation</h3>
+                    <p id="previewFormation"></p>
+                </section>
+                <section class="experience">
+                    <h3>Expérience Professionnelle</h3>
+                    <p id="previewExperience"></p>
+                </section>
+                <section class="complementaire">
+                    <h3>Informations Complémentaires</h3>
+                    <p id="previewLangues"></p>
+                    <p id="previewInterets"></p>
+                </section>
+            </div>
+        </div>
     </div>
-    <div class="left-section">
-      <img id="cvPhoto" alt="Photo de profil">
-      <h3 class="section-title">Informations personnelles</h3>
-      <p><strong>Email :</strong> <span id="cvEmail"></span></p>
-      <p><strong>Téléphone :</strong> <span id="cvPhone"></span></p>
-      <h3 class="section-title">Langues</h3>
-      <p id="cvLanguages"></p>
-      <h3 class="section-title">Centres d'intérêt</h3>
-      <p id="cvHobbies"></p>
-    </div>
-    <div class="right-section">
-      <h3 class="section-title">Formation</h3>
-      <div id="cvEducation"></div>
-      <h3 class="section-title">Expériences professionnelles</h3>
-      <div id="cvExperience"></div>
-    </div>
-</div>
-<script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
